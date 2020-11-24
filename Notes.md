@@ -2,7 +2,7 @@
 
 首先，通过安装必备软件（JRE，数据库和消息代理）来准备生产服务器，然后再继续。
 
-1. 通过访问支持门户网站下载发行版zip文件。
+1. [下载](https://www.alfresco.com/thank-you/thank-you-downloading-alfresco-community-edition)发行版zip文件。
 2. 生成用于相互TLS的证书。
 3. 下载Tomcat并查看所需的安装步骤。
 4. 设置Tomcat。
