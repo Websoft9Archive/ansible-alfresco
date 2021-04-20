@@ -1,28 +1,56 @@
 ---
-# - name: download latest docker-compose file
-#   git:
-#     repo: "{{git_url}}"
-#     dest: "{{project_src}}"
+- name: Delete alfresco dir for sec_installation
+  shell: rm -rf /data/wwwroot/alfresco
 
-- name: create directory
-  file:
-    path: "{{item}}"
+- name: Clone alfresco in Websoft9 
+  git:
+    repo: "{{alfresco_git_url}}"
+    dest: "/data/wwwroot/alfresco"
+    version: dev
+
+- name: Create dir for erpnext
+  file: 
     state: directory
-    mode: 0755
+    path: "{{item}}"
+  loop: 
+    - /data/wwwroot/alfresco/volumes
+    - /data/db/postgresql
+
+- name: Run docker-compose 
+  shell: | 
+    docker-compose -f docker-compose-production.yml up -d
+    sleep 30
+  args:
+    chdir: /data/wwwroot/alfresco
+
+- name: Set soft link for erpnext
+  file:
+    src: '{{item.src}}'
+    dest: '{{item.dest}}'
+    state: link
+    force: yes
   with_items:
-    - /data/wwwroot/alfresco/docker-compose
-    - /data/logs/activemq
-    - /data/postgresql
-    - /data/wwwroot/alfresco/alfresco-search-services/keystores
+  - {src: /data/wwwroot/alfresco/volumes/postgres/data/,dest: /data/db/postgresql/data}
+  - {src: /data/wwwroot/alfresco/volumes/postgres/logs/,dest: /data/db/postgresql/logs}
+  - {src: /data/wwwroot/alfresco/volumes/postgres/logs/,dest: /data/logs/postgresql}
 
-- name: copy docker-compose file
-  template:
-    src: docker-compose.yml
-    dest: /data/wwwroot/alfresco/docker-compose/docker-compose.yml
-    mode: 0644
+# check service and version
+- name: Check alfresco service 
+  shell: >
+    docker inspect  --format='{{.Name}} status {{.State.Status}}' $(docker ps -aq) |cut -b1 --complement
+  register: check_alfresco_service
+  notify: check_alfresco_service
+    
+- name: Check alfresco version
+  shell: |
+    sudo echo "alfresco version:" $(docker images |grep alfresco-share |awk '{print $2}') |sudo tee -a /data/logs/install_version.txt  
 
-- name: run docker-compose
-  docker_compose:
-    project_src: "{{project_src}}/docker-compose" 
+- name: Check activemq version
+  shell: |
+    sudo echo "activemq version:" $(docker images |grep alfresco-activemq |awk '{print $2}') |sudo tee -a /data/logs/install_version.txt  
+
+- name: Check postgresql version
+  shell: |
+    sudo echo "postgresql version:" $(docker images |grep postgres |awk '{print $2}') |sudo tee -a /data/logs/install_version.txt  
 
     

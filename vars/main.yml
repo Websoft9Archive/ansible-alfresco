@@ -1,20 +1,21 @@
-mysql_root_password: 123456  
+common_install_docker: True
+docker_install: False
 
-mysql_databases:
-  name: test_a
-  collation:
-  encoding:
-  state:
-  
-mysql_users: 
-  name: websoft9 
-  priv: 'test_a.*:ALL,GRANT'
+nginx_reverse_proxy_port: "8080"
 
-initdb_vars:
-  db_service_name: 
-    - mysql
-    - postgresql
-  app_service_name: 
-    - redmine
-  db_config_path: 
-    - /data/wwwroot/redmine/config/databases.yml
+docker_applications:
+  - pgadmin
+
+init_docker:
+  alfresco:
+    db: postgresql
+    db_name: alfresco
+    db_username: alfresco
+    db_password: "alfresco"
+    admin_username: admin
+    admin_password: "admin"
+    service_after: "docker.service"
+    compose_path: "/data/wwwroot/alfresco/docker-compose-production.yml"
+    compose_commands:
+      - cd /data/wwwroot/alfresco
+      - sudo sed -i "s/POSTGRES_PASSWORD=alfresco/$new_password/g" docker-compose-production.yml
