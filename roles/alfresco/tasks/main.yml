@@ -1,11 +1,11 @@
 ---
 - name: Delete alfresco dir for sec_installation
-  shell: rm -rf /data/wwwroot/alfresco
+  shell: rm -rf {{alfresco_work_dir}}
 
 - name: Clone alfresco in Websoft9 
   git:
-    repo: "{{alfresco_git_url}}"
-    dest: "/data/wwwroot/alfresco"
+    repo: "{{alfresco_work_dir}}"
+    dest: "{{alfresco_work_dir}}"
     version: dev
 
 - name: Create dir for erpnext
@@ -13,15 +13,18 @@
     state: directory
     path: "{{item}}"
   loop: 
-    - /data/wwwroot/alfresco/volumes
+    - '{{alfresco_work_dir}}'/volumes
     - /data/db/postgresql
 
-- name: Run docker-compose 
-  shell: | 
-    docker-compose -f docker-compose-production.yml up -d
+- name: Rename compose env filename and Run docker-compose 
+  shell: |  
+    rm -rf docker-compose.yml .env
+    mv docker-compose-production.yml docker-compose.yml
+    mv .env_all .env
+    docker-compose up -d
     sleep 30
   args:
-    chdir: /data/wwwroot/alfresco
+    chdir: '{{alfresco_work_dir}}'
 
 - name: Set soft link for erpnext
   file:
@@ -30,9 +33,9 @@
     state: link
     force: yes
   with_items:
-  - {src: /data/wwwroot/alfresco/volumes/postgres/data/,dest: /data/db/postgresql/data}
-  - {src: /data/wwwroot/alfresco/volumes/postgres/logs/,dest: /data/db/postgresql/logs}
-  - {src: /data/wwwroot/alfresco/volumes/postgres/logs/,dest: /data/logs/postgresql}
+  - {'src: {{alfresco_work_dir}}/volumes/postgres/data/',dest: /data/db/postgresql/data}
+  - {'src: {{alfresco_work_dir}}/volumes/postgres/logs/',dest: /data/db/postgresql/logs}
+  - {'src: {{alfresco_work_dir}}/volumes/postgres/logs/',dest: /data/logs/postgresql}
 
 # check service and version
 - name: Check alfresco service 
