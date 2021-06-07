@@ -15,7 +15,7 @@ init_docker:
     admin_username: admin
     admin_password: "admin"
     service_after: "docker.service"
-    compose_path: "/data/wwwroot/alfresco/docker-compose-production.yml"
+    compose_path: "/data/wwwroot/alfresco/docker-compose.yml"
     compose_commands:
       - cd /data/wwwroot/alfresco
-      - sudo sed -i "s/POSTGRES_PASSWORD=alfresco/$new_password/g" docker-compose-production.yml
+      - sudo sed -i "s/123456/$new_password/g" .env
