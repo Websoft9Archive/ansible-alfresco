@@ -26,3 +26,5 @@ init_docker:
     compose_commands:
       - cd /data/wwwroot/alfresco
       - sudo sed -i "s/123456/$new_password/g" .env
+    volumes:
+      - /data/wwwroot/alfresco/volumes
