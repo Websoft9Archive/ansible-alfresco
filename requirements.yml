@@ -4,6 +4,8 @@
 
 - src: https://github.com/websoft9/role_docker
 
+- src: https://github.com/websoft9/role_nginx
+
 - src: https://github.com/websoft9/role_init
 
 - src: https://github.com/websoft9/role_preend
