@@ -13,7 +13,7 @@
     state: directory
     path: "{{item}}"
   loop: 
-    - '{{alfresco_work_dir}}'/volumes
+    - '{{alfresco_work_dir}}/volumes'
     - /data/db/postgresql
 
 - name: Rename compose env filename and Run docker-compose 
