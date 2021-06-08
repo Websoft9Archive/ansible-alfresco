@@ -33,9 +33,9 @@
     state: link
     force: yes
   with_items:
-  - {'src: {{alfresco_work_dir}}/volumes/postgres/data/',dest: /data/db/postgresql/data}
-  - {'src: {{alfresco_work_dir}}/volumes/postgres/logs/',dest: /data/db/postgresql/logs}
-  - {'src: {{alfresco_work_dir}}/volumes/postgres/logs/',dest: /data/logs/postgresql}
+  - {src: '{{alfresco_work_dir}}/volumes/postgres/data/',dest: /data/db/postgresql/data}
+  - {src: '{{alfresco_work_dir}}/volumes/postgres/logs/',dest: /data/db/postgresql/logs}
+  - {src: '{{alfresco_work_dir}}/volumes/postgres/logs/',dest: /data/logs/postgresql}
 
 # check service and version
 - name: Check alfresco service 
