@@ -4,7 +4,7 @@
 
 - name: Clone alfresco in Websoft9 
   git:
-    repo: "{{alfresco_work_dir}}"
+    repo: "{{alfresco_git_url}}"
     dest: "{{alfresco_work_dir}}"
     version: dev
 
