@@ -39,8 +39,7 @@
 
 # check service and version
 - name: Check alfresco service 
-  shell: >
-    docker ps -a |jq .
+  shell: docker ps -a 
   register: check_alfresco_service
   notify: check_alfresco_service
     
