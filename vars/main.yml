@@ -1,7 +1,7 @@
 common_install_docker: True
 docker_install: False
 
-nginx_reverse_proxy_port: "8080"
+nginx_reverse_proxy_port: "8080/share/page/"
 
 docker_applications:
   - pgadmin
