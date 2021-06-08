@@ -40,7 +40,7 @@
 # check service and version
 - name: Check alfresco service 
   shell: >
-    docker inspect  --format='{{.Name}} status {{.State.Status}}' $(docker ps -aq) |cut -b1 --complement
+    docker ps -a |jq .
   register: check_alfresco_service
   notify: check_alfresco_service
     
