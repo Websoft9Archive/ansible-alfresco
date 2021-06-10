@@ -41,7 +41,7 @@
 - name: Copy encryption.py file
   copy:
     src: encryption.py
-    dest: /tmp/encryption.py
+    dest: /opt/encryption.py
 
 - name: Install passlib module for random password
   pip: 
