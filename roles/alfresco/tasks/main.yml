@@ -38,6 +38,11 @@
 - name: Restarted nginx
   shell: systemctl restart nginx
 
+- name: Copy encryption.py file
+  copy:
+    src: encryption.py
+    dest: /tmp/encryption.py
+
 - name: Set soft link for erpnext
   file:
     src: '{{item.src}}'
