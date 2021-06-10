@@ -36,7 +36,8 @@ init_docker:
       - sudo echo $new_password |tee -a /tmp/password
       - sudo python3 /opt/encryption.py
       - md4_password=$(cat /tmp/password)
-      - export PGPASSWORD=$new_password  
+      - export PGPASSWORD=$new_password 
+      - source /opt/check_postgresql_table.sh 
       - sudo echo "UPDATE alf_node_properties SET string_value='$md4_password' WHERE node_id=4 and qname_id=10;" | psql -h 127.0.0.1 -U alfresco -d alfresco
       - cd /data/wwwroot/alfresco 
       - sudo docker-compose restart

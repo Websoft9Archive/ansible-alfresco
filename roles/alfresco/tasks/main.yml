@@ -38,10 +38,15 @@
 - name: Restarted nginx
   shell: systemctl restart nginx
 
-- name: Copy encryption.py file
+- name: Copy encryption.py script
   copy:
     src: encryption.py
     dest: /opt/encryption.py
+
+- name: Copy check postgresql table exists script
+  copy:
+    src: check_postgresql_table.sh
+    dest: /opt/check_postgresql_table.sh
 
 - name: Install passlib module for random password
   pip: 
