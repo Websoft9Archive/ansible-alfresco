@@ -35,6 +35,7 @@ init_docker:
     commands: 
       - sudo echo -e "\e[1;31m Password initialization takes about 3-5 minutes, please be patient... \e[0m" |tee -a /credentials/password.txt
       - sudo echo $new_password |tee -a /tmp/password
+      - sudo python2 /opt/encryption.py
       - sudo python3 /opt/encryption.py
       - md4_password=$(cat /tmp/password)
       - export PGPASSWORD=$new_password 
