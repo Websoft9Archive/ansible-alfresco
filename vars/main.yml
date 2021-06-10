@@ -33,6 +33,7 @@ init_docker:
     volumes:
       - /data/wwwroot/alfresco/volumes
     commands: 
+      - sudo echo -e "\e[1;31m Password initialization takes about 3-5 minutes, please be patient... \e[0m" |tee -a /credentials/password.txt
       - sudo echo $new_password |tee -a /tmp/password
       - sudo python3 /opt/encryption.py
       - md4_password=$(cat /tmp/password)
@@ -41,4 +42,5 @@ init_docker:
       - sudo echo "UPDATE alf_node_properties SET string_value='$md4_password' WHERE node_id=4 and qname_id=10;" | psql -h 127.0.0.1 -U alfresco -d alfresco
       - cd /data/wwwroot/alfresco 
       - sudo docker-compose restart
+
       
