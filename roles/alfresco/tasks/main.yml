@@ -51,7 +51,6 @@
 - name: Install passlib module for random password
   pip: 
     name: passlib
-    executable: pip3
 
 - name: Set soft link for alfresco
   file:
