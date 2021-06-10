@@ -8,7 +8,7 @@
     dest: "{{alfresco_work_dir}}"
     version: dev
 
-- name: Create dir for erpnext
+- name: Create dir for alfresco
   file: 
     state: directory
     path: "{{item}}"
@@ -48,7 +48,7 @@
     name: passlib
     executable: pip3
 
-- name: Set soft link for erpnext
+- name: Set soft link for alfresco
   file:
     src: '{{item.src}}'
     dest: '{{item.dest}}'
