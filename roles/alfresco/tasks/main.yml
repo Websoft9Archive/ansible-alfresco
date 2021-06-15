@@ -6,6 +6,7 @@
   git:
     repo: "{{alfresco_git_url}}"
     dest: "{{alfresco_work_dir}}"
+    version: dev
 
 - name: Create dir for alfresco
   file: 
@@ -15,11 +16,21 @@
     - '{{alfresco_work_dir}}/volumes'
     - /data/db/postgresql
 
-- name: Rename compose env filename and Run docker-compose 
+- name: Rename compose env filename 
   shell: |  
     rm -rf docker-compose.yml .env
     mv docker-compose-production.yml docker-compose.yml
     mv .env_all .env
+  args:
+    chdir: '{{alfresco_work_dir}}'
+
+- name: Change alfresco site url
+  shell: |
+    public_ip=`wget -O - https://download.websoft9.com/ansible/get_ip.sh | bash`
+    sudo sed -i "s/APP_SITE_URL=.*/APP_SITE_URL=$public_ip/g" .env
+
+- name: Run docker-compose 
+  shell: |  
     docker-compose up -d
     sleep 30
   args:

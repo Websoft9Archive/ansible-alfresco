@@ -29,7 +29,9 @@ init_docker:
     compose_path: "/data/wwwroot/alfresco/docker-compose.yml"
     compose_commands:
       - cd /data/wwwroot/alfresco
+      - public_ip=`wget -O - https://download.websoft9.com/ansible/get_ip.sh | bash`
       - sudo sed -i "s/123456/$new_password/g" .env
+      - sudo sed -i "s/APP_SITE_URL=.*/APP_SITE_URL=$public_ip/g" .env
     volumes:
       - /data/wwwroot/alfresco/volumes
     commands: 
