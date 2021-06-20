@@ -1,63 +1,95 @@
+---
+sidebarDepth: 3
+---
+
 # 参数
 
-## 组件及路径
+Alfresco 预装包包含 Alfresco 运行所需一序列支撑软件（简称为“组件”），下面列出主要组件名称、安装路径、配置文件地址、端口、版本等重要的信息。
 
-Metabase部署包中不仅仅只有Metabase本身，还包含一序列支持Metabase运行所需的其他软件（这里称之为组件），下面列出主要组件名称、安装路径、配置文件地址等重要的信息：
+## 路径
 
-### Metabase
+本部署方案中的 Alfresco 采用 Docker 部署，运行 `docker ps` 查看运行的容器。
+```
+CONTAINER ID   IMAGE                                                  COMMAND                  CREATED             STATUS             PORTS                                                                                                                                                                                NAMES
+3d2afa8a1cc7   alfresco/alfresco-acs-nginx:3.1.1                      "/entrypoint.sh"         About an hour ago   Up About an hour   80/tcp, 0.0.0.0:8080->8080/tcp, :::8080->8080/tcp                                                                                                                                    alfresco-proxy
+b42251c78a71   alfresco/alfresco-search-services:2.0.1                "/bin/sh -c '$DIST_D…"   About an hour ago   Up About an hour   10001/tcp, 0.0.0.0:8083->8983/tcp, :::8083->8983/tcp                                                                                                                                 alfresco-solr6
+a381a9646f4b   alfresco/alfresco-transform-core-aio:2.3.10            "/bin/sh -c 'java $J…"   About an hour ago   Up About an hour   0.0.0.0:8090->8090/tcp, :::8090->8090/tcp                                                                                                                                            alfresco-transform
+af14e4d3cd86   alfresco/alfresco-content-repository-community:7.0.0   "catalina.sh run -se…"   About an hour ago   Up About an hour   8000/tcp, 8080/tcp, 10001/tcp                                                                                                                                                        alfresco-content
+50059f56edff   postgres:13.1                                          "docker-entrypoint.s…"   About an hour ago   Up About an hour   0.0.0.0:5432->5432/tcp, :::5432->5432/tcp                                                                                                                                            alfresco-postgres
+692e2acf019d   alfresco/alfresco-activemq:5.16.1                      "/bin/sh -c '${ACTIV…"   About an hour ago   Up About an hour   0.0.0.0:5672->5672/tcp, :::5672->5672/tcp, 0.0.0.0:8161->8161/tcp, :::8161->8161/tcp, 0.0.0.0:61613->61613/tcp, :::61613->61613/tcp, 0.0.0.0:61616->61616/tcp, :::61616->61616/tcp   alfresco-activemq
+ca3a6baf750e   alfresco/alfresco-share:7.0.0                          "/usr/local/tomcat/s…"   About an hour ago   Up About an hour   8000/tcp, 8080/tcp                                                                                                                                                                   alfresco-share
+4a0c8d7e6c2e   dpage/pgadmin4                                         "/entrypoint.sh"         About an hour ago   Up About an hour   443/tcp, 0.0.0.0:9090->80/tcp, :::9090->80/tcp                                                                                                                                       pgadmin
+```
 
-Metabase安装目录: /data/wwwroot/metabase  
-Metabase配置文件: /data/wwwroot/metabase/ccc.ii
+### Alfresco
 
-> Metabase配置文件中包含数据库连接信息，更改了MySQL数据库账号密码，此处也需要对应修改
+Alfresco 安装目录： */data/wwwroot/alfresco*  
+Alfresco 容器存储目录： */data/wwwroot/alfresco/volumes/alfresco* 
+Alfresco 日志目录： */data/wwwroot/alfresco/volumes/alfresco/share/logs*  
 
-### Java
-安装路径
-配置路径
-日志路径
-
-### Tomcat
-Apache Vhost Configuration File: _/etc/httpd/conf.d/vhost.conf_  
-Apache Configuration directory: _/etc/httpd/conf.d_  
-Apache Log Files: _/var/log/httpd_
-
+> 上传的文档存放在...
 
 ### Nginx
-Apache Vhost Configuration File: _/etc/httpd/conf.d/vhost.conf_  
-Apache Configuration directory: _/etc/httpd/conf.d_  
-Apache Log Files: _/var/log/httpd_
 
-### MYSQL
-Database install directory: /usr/local/mysql  
-Database data directory: /data/mysql  
-Database Configuration File: /etc/my.cnf  
-MySQL Management URL: _http://Internet IP/phpmyadmin_
+Nginx 虚拟主机配置文件：*/etc/nginx/conf.d/default.conf*  
+Nginx 主配置文件： */etc/nginx/nginx.conf*  
+Nginx 日志文件： */var/log/nginx*  
+Nginx 伪静态规则目录： */etc/nginx/conf.d/rewrite*  
+Nginx 验证访问文件：*/etc/nginx/.htpasswd/htpasswd.conf*  
 
-### Redis
-Redis configuration file: _/etc/redis.conf_  
-Redis data directory: _/var/lib/redis_
+### PostgreSQL
+
+PostgreSQL 配置文件: */data/postgresql/config*
+PostgreSQL 数据目录：*/data/postgresql/pgdata*
+PostgreSQL 日志目录: */data/postgresql/log*
+
+### pgAdmin
+
+pgAdmin 是官方出品的可视化 PostgreSQL 管理工具，采用 Docker 安装
+
+pgAdmin 存储目录: */data/apps/pgadmin*  
+pgAdmin 配置文件: */data/apps/pgadmin/.env*  
+
+### Docker
+
+Docker 根目录: */var/lib/docker*  
+Docker 镜像目录: */var/lib/docker/image*   
+Docker daemon.json 文件：默认没有创建，请到 */etc/docker* 目录下根据需要自行创建   
 
 ## 端口号
 
-下面是您在使用本镜像过程中，需要用到的端口号，请通过云控制台安全组进行设置
+在云服务器中，通过 **[安全组设置](https://support.websoft9.com/docs/faq/zh/tech-instance.html)** 来控制（开启或关闭）端口是否可以被外部访问。 
+
+通过命令`netstat -tunlp` 看查看相关端口，下面列出可能要用到的端口：
 
 | 名称 | 端口号 | 用途 |  必要性 |
 | --- | --- | --- | --- |
-| MySQL | 3306 | 远程连接MySQL | 可选 |
-| HTTP | 80 | 通过http访问Metabase | 必须 |
-| HTTPS | 443 | 通过https访问Metabase | 可选 |
-| phpMyAdmin on Docker | 9090 | 可视化管理MySQL | 可选 |
+| TCP | 80 | 通过 HTTP 访问 Alfresco Share  | 必要 |
+| TCP | 443 | 通过 HTTPS 访问 Alfresco Share | 可选 |
+| TCP | 8080 | 通过 HTTP 访问 Alfresco 入口 | 可选 |
+| TCP | 5432 | PostgreSQL 远程访问 | 可选 |
+| TCP | 9090 | 通过 HTTP 访问 pgAdmin | 可选 |
 
 ## 版本号
 
-组件对应的基本版本号可以通过云市场商品页面查看，但部署到您的服务器之后，版本会有一定的升级，故更为精准的版本请通过在服务器上运行命令查看：
+组件版本号可以通过云市场商品页面查看。但部署到您的服务器之后，组件会自动进行更新导致版本号有一定的变化，故精准的版本号请通过在服务器上运行命令查看：
 
 ```shell
-# Tomcat version
+# Check all components version
+sudo cat /data/logs/install_version.txt
 
-# Nginx version
+# Linux Version
+lsb_release -a
 
-# MySQL version
+# Nginx  Version
+nginx -V
 
-# Java Version
+# Docker Version
+docker -v
+
+# PostgreSQL version
+docker images |grep postgres |awk '{print $2}'
+
+# Alfresco version
+docker images |grep alfresco-share |awk '{print $2}'
 ```

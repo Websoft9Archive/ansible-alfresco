@@ -1,4 +1,0 @@
-git_url: https://github.com/Alfresco/acs-community-deployment.git
-project_src: /data/wwwroot/alfresco
-POSTGRES_USER: alfresco
-POSTGRES_PASSWORD: alfresco
