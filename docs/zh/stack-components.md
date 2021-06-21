@@ -24,7 +24,7 @@ ca3a6baf750e   alfresco/alfresco-share:7.0.0                          "/usr/loca
 ### Alfresco
 
 Alfresco 安装目录： */data/wwwroot/alfresco*  
-Alfresco 容器存储目录： */data/wwwroot/alfresco/volumes/alfresco* 
+Alfresco 容器存储目录： */data/wwwroot/alfresco/volumes/alfresco*  
 Alfresco 日志目录： */data/wwwroot/alfresco/volumes/alfresco/share/logs*  
 
 > 上传的文档存放在...
@@ -39,9 +39,8 @@ Nginx 验证访问文件：*/etc/nginx/.htpasswd/htpasswd.conf*
 
 ### PostgreSQL
 
-PostgreSQL 配置文件: */data/postgresql/config*
-PostgreSQL 数据目录：*/data/postgresql/pgdata*
-PostgreSQL 日志目录: */data/postgresql/log*
+PostgreSQL 数据目录：*/data/db/postgresql/data*  
+PostgreSQL 日志目录: */data/db/postgresql/log*  
 
 ### pgAdmin
 

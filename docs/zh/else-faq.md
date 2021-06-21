@@ -14,18 +14,7 @@ Alfresco Community Edition 是 Alfresco Content Services Enterprise 的开源版
 
 #### 本项目中 Alfresco 采用何种安装方式？
 
-采用 rpm/deb 包的安装方式
-
-#### 如何以调试模式启动Alfresco服务？
-
-```
-systemctl stop alfresco-server
-alfresco-server console
-```
-
-#### 是否可以通过命令行修改Alfresco后台密码？
-
-可以，`alfrescoctl change_password  admin newpassword`
+Docker
 
 #### 如果没有域名是否可以部署 Alfresco？
 
@@ -37,11 +26,8 @@ alfresco-server console
 
 #### 是否有可视化的数据库管理工具？
 
-有，内置phpMyAdmin，访问地址：*http://服务器公网IP:9090*
+有，内置 pgAdmin，访问地址：*http://服务器公网IP:9090*
 
-#### 如何禁止外界访问phpMyAdmin？
-
-连接服务器，编辑 [phpMyAdmin 配置文件](/zh/stack-components.md#phpmyadmin)，将其中的 `Require all granted` 更改为 `Require ip 192.160.1.0`，然后重启 Apache 服务
 
 #### 是否可以修改Alfresco的源码路径？
 

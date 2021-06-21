@@ -6,9 +6,9 @@ home: false
 
 This documentation is provided by [Websoft9](https://www.websoft9.com/). It can help users to acquire skills of Alfresco Deployment, Installation, Configuration, HTTPS, SMTP, Backup, Upgrade, Connect Instance and more.
 
-[Alfresco](https://alfresco-server.apache.org/) is the most widely deployed open source message broker. With more than 35,000 production deployments of Alfresco world-wide at small startups and large enterprises, Alfresco is the most popular open source message broker.
+[Alfresco Community Edition](https://www.alfresco.com/ecm-software/alfresco-community-editions) is open source Enterprise Content Management software that handles any type of content, allowing users to easily share and collaborate on content.
 
-![](https://libs.websoft9.com/Websoft9/DocsPicture/zh/alfresco/alfresco-gui-websoft9.png)
+![](https://libs.websoft9.com/Websoft9/DocsPicture/zh/alfresco/alfresco-arcgui-websoft9.png)
 
 ---
 

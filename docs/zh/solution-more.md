@@ -2,10 +2,6 @@
 
 下面每一个方案，都经过实践证明行之有效，希望能够对你有帮助
 
-## 配置
-
-参考官方方案：https://www.alfresco.com/configure.html
-
 ## 域名绑定
 
 绑定域名的前置条件是：已经完成域名解析（登录域名控制台，增加一个A记录指向服务器公网IP）  
@@ -33,17 +29,29 @@ Alfresco 域名绑定操作步骤：
 
 ### 修改密码
 
-1. 登录 Alfresco 后台，依次打开：【Manage】>【Staff】，找到所需修改密码的账号对象
-  ![Alfresco 修改密码](https://libs.websoft9.com/Websoft9/DocsPicture/en/alfresco/alfresco-modifypw001-websoft9.png)
+1. 登录 Alfresco 后台，右上角依次打开：【Administrator】>【我的个人档案】
+  ![Alfresco 修改密码](https://libs.websoft9.com/Websoft9/DocsPicture/zh/alfresco/alfresco-modifypw-websoft9.png)
 
-2. 开始修改密码
-  ![Alfresco 修改密码](https://libs.websoft9.com/Websoft9/DocsPicture/en/alfresco/alfresco-modifypw002-websoft9.png)
+2. 点击【更改密码】，开始修改密码
 
 ### 找回密码
 
-如果用户忘记了密码，建议通过邮件的方式找回密码：
+如果用户忘记了密码，需要通过修改[数据库](/zh/admin-postgresql.md)中的密码信息来重置密码：
 
-1. 完成 [SMTP 设置](/zh/solution-smtp.md)
+1. 使用 **SSH** 连接到 Alfresco 所在的服务器
 
-2. 打开 Alfresco 登录页面，点击【Forgot】开始通过邮件找回密码
-  ![Ghost 找回密码](https://libs.websoft9.com/Websoft9/DocsPicture/en/alfresco/alfresco-forgetpw-websoft9.png)
+2. 进入到 alfresco 数据库的 PSQL 交互式状态
+   ```
+   docker exec -it alfresco-postgres psql -U alfresco -d alfresco
+   ```
+
+3. 运行如下的修改密码命令（新的密码为 **admin**）
+   ```
+   UPDATE alf_node_properties SET string_value='209c6174da490caeb422f3fa5a7ae634' WHERE node_id=4 and qname_id=10
+   ```
+
+4. 退出容器交互式模式，回到服务器命令行中重启所有容器后生效
+   ```
+   cd /data/wwwroot/alfresco
+   docker-compose restart
+   ```

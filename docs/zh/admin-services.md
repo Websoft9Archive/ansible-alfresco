@@ -4,49 +4,33 @@
 
 ### Alfresco
 
-```shell
-sudo systemctl start alfresco-server
-sudo systemctl stop alfresco-server
-sudo systemctl restart alfresco-server
-sudo systemctl status alfresco-server
+Alfresco 使用 7 个容器，因此直接使用 Docker-compose 管理所有容器的服务器
 
-# you can use this debug mode if Alfresco service can't run
-alfresco-server console
+```shell
+
+cd /data/wwwroot/alfresco
+
+sudo docker-compose start alfresco-server
+sudo docker-compose stop alfresco-server
+sudo docker-compose restart alfresco-server
 ```
 
-### MySQL
+### PostgreSQL
 
 ```shell
-sudo systemctl start mysql
-sudo systemctl stop mysql
-sudo systemctl restart mysql
-sudo systemctl status mysql
+sudo docker start alfresco-postgres
+sudo docker restart alfresco-postgres
+sudo docker stop alfresco-postgres
+sudo docker stats alfresco-postgres
 ```
 
-### MySQL on Docker
+
+### pgAdmin
 
 ```shell
-sudo docker start redmine-mysql
-sudo docker restart redmine-mysql
-sudo docker stop redmine-mysql
-sudo docker stats redmine-mysql
-```
-
-### Redis
-
-```shell
-systemctl start redis
-systemctl stop redis
-systemctl restart redis
-systemctl status redis
-```
-
-### phpMyAdmin
-
-```shell
-sudo docker start phpmyadmin
-sudo docker stop phpmyadmin
-sudo docker restart phpmyadmin
+sudo docker start pgadmin
+sudo docker stop pgadmin
+sudo docker restart pgadmin
 sudo docker stats pgadmin
 ```
 
@@ -59,16 +43,13 @@ sudo systemctl stop docker
 sudo systemctl status docker
 ```
 
-### Docker-compose 服务
+### Docker-compose
 
 ```
 #创建容器编排
-sudo docker-compose up
-
-#创建容器编排并重建有变化的容器
 sudo docker-compose up -d
 
-#启动/重启
+#启动/停止/重启
 sudo docker-compose start
 sudo docker-compose stop
 sudo docker-compose restart
