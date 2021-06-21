@@ -4,56 +4,59 @@ These commands are required when you use the Alfresco of Websoft9.
 
 ### Alfresco
 
-```shell
-sudo systemctl start alfresco-server
-sudo systemctl stop alfresco-server
-sudo systemctl restart alfresco-server
-sudo systemctl status alfresco-server
+Alfresco service have 7 containers, so we should use Docker-compose to manage it
 
-# you can use this debug mode if Alfresco service can't run
-alfresco-server console
+```shell
+
+cd /data/wwwroot/alfresco
+
+sudo docker-compose start alfresco-server
+sudo docker-compose stop alfresco-server
+sudo docker-compose restart alfresco-server
 ```
 
-### MySQL
+### PostgreSQL
 
 ```shell
-sudo systemctl start mysql
-sudo systemctl stop mysql
-sudo systemctl restart mysql
-sudo systemctl status mysql
+sudo docker start alfresco-postgres
+sudo docker restart alfresco-postgres
+sudo docker stop alfresco-postgres
+sudo docker stats alfresco-postgres
 ```
 
-### Redis
+### pgAdmin
 
 ```shell
-sudo systemctl start redis
-sudo systemctl stop redis
-sudo systemctl restart redis
-sudo systemctl status redis
+sudo docker start pgadmin
+sudo docker stop pgadmin
+sudo docker restart pgadmin
+sudo docker stats pgadmin
 ```
 
 ### Docker
+
 ```shell
 sudo systemctl start docker
-sudo systemctl stop docker
 sudo systemctl restart docker
+sudo systemctl stop docker
 sudo systemctl status docker
 ```
 
-### phpMyAdmin on Docker
-```shell
-sudo docker inspect phpmyadmin
-sudo docker start phpmyadmin
-sudo docker restart phpmyadmin
-sudo docker stop phpmyadmin
-sudo docker rm phpmyadmin
+### Docker-compose
+
+```
+sudo docker-compose up -d
+
+sudo docker-compose start
+sudo docker-compose stop
+sudo docker-compose restart
 ```
 
-### ONLYOFFICE Document Server on Docker
+### Nginx
+
 ```shell
-sudo docker inspect onlyofficedocumentserver
-sudo docker start onlyofficedocumentserver
-sudo docker restart onlyofficedocumentserver
-sudo docker stop onlyofficedocumentserver
-sudo docker rm onlyofficedocumentserver
+sudo systemctl start nginx
+sudo systemctl stop nginx
+sudo systemctl restart nginx
+sudo systemctl status nginx
 ```

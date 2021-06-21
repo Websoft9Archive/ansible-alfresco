@@ -28,7 +28,6 @@ Docker
 
 有，内置 pgAdmin，访问地址：*http://服务器公网IP:9090*
 
-
 #### 是否可以修改Alfresco的源码路径？
 
 不可以

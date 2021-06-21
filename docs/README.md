@@ -8,7 +8,7 @@ This documentation is provided by [Websoft9](https://www.websoft9.com/). It can 
 
 [Alfresco Community Edition](https://www.alfresco.com/ecm-software/alfresco-community-editions) is open source Enterprise Content Management software that handles any type of content, allowing users to easily share and collaborate on content.
 
-![](https://libs.websoft9.com/Websoft9/DocsPicture/zh/alfresco/alfresco-arcgui-websoft9.png)
+![](https://libs.websoft9.com/Websoft9/DocsPicture/en/alfresco/alfresco-arcgui-websoft9.png)
 
 ---
 

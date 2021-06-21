@@ -1,12 +1,24 @@
 # FAQ
 
-#### Can I reset password of Alfresco by command?
+### Does Alfresco support multiple languages?
 
-Yes, e.g `alfrescoctl change_password  admin newpassword`
+Yes, it automatically adapt according to the browser
+
+#### What's different between Alfresco Content Services Enterprise and Alfresco Community Edition?
+
+Alfresco Community Edition is the open source edition of Alfresco Content Services Enterprise, refer to [Comparison chart](https://www.alfresco.com/alfresco-content-services-enterprise-vs-alfresco-community-edition)
+
+#### What file formats does Alfresco support?
+
+Refer to [Alfresco-formats](https://www.alfresco.com.cn/alfresco-formats)
+
+#### How was Alfresco installed in this solution?
+
+Docker
 
 #### If there is no domain name, can I deploy Alfresco?
 
-Yes, access Alfresco by *http://Server's Internet IP:8161*.
+Yes, access Alfresco by *http://Server's Internet IP*.
 
 #### What is the password for the database root user?
 
@@ -14,7 +26,7 @@ The password is stored in the server related file `/credentials/password.txt`.
 
 #### Is there a web-base GUI database management tool?
 
-Yes, phpMyAdmin is included. Visit by *http://Server's Internet IP:9090*.
+Yes, pgAdmin is included. Visit by *http://Server's Internet IP:9090*.
 
 #### Is it possible to modify the source path of Alfresco?
 
@@ -25,7 +37,7 @@ No.
 Change owner(group) or permissions as below:
 
 ```shell
-chown -R apache.apache /data/wwwroot
+chown -R nginx.nginx /data/wwwroot
 find /data/wwwroot -type d -exec chmod 750 {} \;
 find /data/wwwroot -type f -exec chmod 640 {} \;
 ```

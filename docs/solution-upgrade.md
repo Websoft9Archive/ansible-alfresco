@@ -42,5 +42,3 @@ This deployment solution is based on Docker and so you can upgrade Alfresco by t
    docker-compose down -v
    docker-compose up -d
    ```
-
-Refer to the official docs: [Upgrading Alfresco](https://www.alfresco.com/upgrade.html)

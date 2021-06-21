@@ -6,17 +6,25 @@ The Alfresco deployment package contains a sequence of software (referred to as 
 
 This solution use Docker to deploy all service, you can run the command `docker ps` to list them  
 
+```
+CONTAINER ID   IMAGE                                                  COMMAND                  CREATED             STATUS             PORTS                                                                                                                                                                                NAMES
+3d2afa8a1cc7   alfresco/alfresco-acs-nginx:3.1.1                      "/entrypoint.sh"         About an hour ago   Up About an hour   80/tcp, 0.0.0.0:8080->8080/tcp, :::8080->8080/tcp                                                                                                                                    alfresco-proxy
+b42251c78a71   alfresco/alfresco-search-services:2.0.1                "/bin/sh -c '$DIST_D…"   About an hour ago   Up About an hour   10001/tcp, 0.0.0.0:8083->8983/tcp, :::8083->8983/tcp                                                                                                                                 alfresco-solr6
+a381a9646f4b   alfresco/alfresco-transform-core-aio:2.3.10            "/bin/sh -c 'java $J…"   About an hour ago   Up About an hour   0.0.0.0:8090->8090/tcp, :::8090->8090/tcp                                                                                                                                            alfresco-transform
+af14e4d3cd86   alfresco/alfresco-content-repository-community:7.0.0   "catalina.sh run -se…"   About an hour ago   Up About an hour   8000/tcp, 8080/tcp, 10001/tcp                                                                                                                                                        alfresco-content
+50059f56edff   postgres:13.1                                          "docker-entrypoint.s…"   About an hour ago   Up About an hour   0.0.0.0:5432->5432/tcp, :::5432->5432/tcp                                                                                                                                            alfresco-postgres
+692e2acf019d   alfresco/alfresco-activemq:5.16.1                      "/bin/sh -c '${ACTIV…"   About an hour ago   Up About an hour   0.0.0.0:5672->5672/tcp, :::5672->5672/tcp, 0.0.0.0:8161->8161/tcp, :::8161->8161/tcp, 0.0.0.0:61613->61613/tcp, :::61613->61613/tcp, 0.0.0.0:61616->61616/tcp, :::61616->61616/tcp   alfresco-activemq
+ca3a6baf750e   alfresco/alfresco-share:7.0.0                          "/usr/local/tomcat/s…"   About an hour ago   Up About an hour   8000/tcp, 8080/tcp                                                                                                                                                                   alfresco-share
+4a0c8d7e6c2e   dpage/pgadmin4                                         "/entrypoint.sh"         About an hour ago   Up About an hour   443/tcp, 0.0.0.0:9090->80/tcp, :::9090->80/tcp                                                                                                                                       pgadmin
+```
+
 ### Alfresco
 
-Alfresco installation directory:  */data/alfresco*  
-Alfresco logs directory:  */data/logs/alfresco*  
+Alfresco 安装目录： */data/wwwroot/alfresco*  
+Alfresco 容器存储目录： */data/wwwroot/alfresco/volumes/alfresco*  
+Alfresco 日志目录： */data/wwwroot/alfresco/volumes/alfresco/share/logs*  
 
-### Apache
-
-Apache vhost configuration file: */etc/httpd/conf.d/vhost.conf*    
-Apache main configuration file: */etc/httpd/conf/httpd.conf*   
-Apache logs file: */var/log/httpd*  
-Apache module configuration file: */etc/httpd/conf.modules.d/00-base.conf*   
+> 上传的文档存放在...
 
 ### Nginx
 
@@ -26,50 +34,23 @@ Nginx logs file: */var/log/nginx*
 Nginx rewrite rules directory: */etc/nginx/conf.d/rewrite*  
 Nginx htpasswd file: */etc/nginx/.htpasswd/htpasswd.conf*  
 
-### MySQL
+### PostgreSQL
 
-MySQL installation directory: */usr/local/mysql*  
-MySQL data directory: */data/mysql*  
-MySQL configuration file: */etc/my.cnf*    
+PostgreSQL data directory: */data/db/postgresql/data*  
+PostgreSQL data directory: */data/db/postgresql/logs*  
 
-MySQL Web Management refer to [MySQL Management](/admin-mysql.md)
+### pgAdmin
 
-### MySQL on Docker
+pgAdmin is a visual PostgreSQL management tool, is installed based on docker. 
 
-MySQL data directory: */data/db/mysql*  
-MySQL Web Management refer to [MySQL Management](/admin-mysql.md)
-
-###  phpMyAdmin
-
-phpMyAdmin is a visual MySQL management tool, is installed based on docker.  
-
-phpMyAdmin directory：*/data/apps/phpmyadmin*  
-phpMyAdmin docker compose file：*/data/apps/phpmyadmin/docker-compose.yml* 
-
-### MongoDB
-
-MongoDB data directory: */var/lib/mongodb*  
-MongoDB Configuration File:  */etc/mongod.conf*  
-MongoDB logs File:  */var/log/mongodb*  
-
-### adminMongo
-
-adminMongo is a visual MongoDB management tool, is installed based on docker.  
-
-Docker root directory: */var/lib/docker*  
-Docker image directory: */var/lib/docker/image*  
+pgAdmin directory：*/data/apps/pgadmin*  
+pgAdmin docker compose file：*/data/apps/pgadmin/docker-compose.yml* 
 
 ### Docker
 
 Docker root directory: */var/lib/docker*  
 Docker image directory: */var/lib/docker/image*   
 Docker daemon.json: please create it when you need and save to to the directory */etc/docker*   
-
-### Redis
-
-Redis configuration file: */etc/redis.conf*  
-Redis data directory: */var/lib/redis*  
-Redis logs file: */var/log/redis/redis.log*
 
 ## Ports
 
@@ -81,12 +62,11 @@ The following are the ports you may use:
 
 | Name | Number | Use |  Necessity |
 | --- | --- | --- | --- |
-| TCP | 80 | HTTP to access Alfresco | Required |
-| TCP | 443 | HTTPS to access Alfresco | Optional |
-| TCP | 3306 | Remote to access MySQL | Optional |
-| TCP | 9003 | Use port to access Alfresco | Optional |
-| TCP | 9002 | Alfresco Document Server on Docker | Optional |
-| TCP | 9090 | phpMyAdmin on Docker | Optional |
+| TCP | 80 | HTTP to access Alfresco share | Required |
+| TCP | 443 | HTTPS to access Alfresco share | Optional |
+| TCP | 8080 | Use port to access Alfresco | Optional |
+| TCP | 5432 | Remote to access PostgreSQL | Optional |
+| TCP | 9090 | HTTP to access pgAdmin on Docker | Optional |
 
 
 ## Version
@@ -103,16 +83,12 @@ lsb_release -a
 # Nginx  Version
 nginx -V
 
-# Java version
-java -v
-
 # Docker Version
 docker -v
 
-# erlang  Version
-yum info erlang
-apt show erlang
+# PostgreSQL version
+docker images |grep postgres |awk '{print $2}'
 
 # Alfresco version
-alfrescoctl status | grep Alfresco*
+docker images |grep alfresco-share |awk '{print $2}'
 ```

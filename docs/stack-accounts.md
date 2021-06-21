@@ -10,14 +10,18 @@ Here are the required username and password for Alfresco installation and config
 
 * Alfresco administrator username: `admin`
 * Alfresco administrator password: Get it form the file of your server */credentials/password.txt*
-  > If there no password.txt exist, the administrator password is `admin`
 
-## MySQL
+## PostgreSQL
 
-* MySQL administrator username: `root`
-* MySQL administrator password: Get it from the file of your server */credentials/password.txt*  
+* Administrator username: *`alfresco`*
+* Administrator password: stored in the file of your server instance: */credentials/password.txt*. 
 
-> If you want to log in MySQL, refer to [MySQL Web interface Management](/admin-mysql.md)
+## pgAdmin
+
+* Administrator username: *`user@domain.com`*
+* Administrator password: stored in the file of your server instance: */credentials/password.txt*. 
+
+> You must change your pgAdmin password when login successfully
 
 ## Linux
 

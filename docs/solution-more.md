@@ -2,10 +2,6 @@
 
 Each of the following solutions has been proved to be effective and we hope it can give you help.
 
-## Configuration 
-
-Refer to the official docs: https://www.alfresco.com/configure.html
-
 ## Binding Domain
 
 The precondition for binding a domain is that Alfresco can accessed by domain name.
@@ -35,18 +31,31 @@ There are two main measures to reset password.
 
 ### Changing password
 
-Take the steps below:
+Take the steps below: 
 
-1. log in the Alfresco backend, open 【Manage】>【Staff】 and find the user account, of which you want to change password;
+1. Login Alfresco, open 【Administrator】>【My Profile】 
+  ![Alfresco modify password](https://libs.websoft9.com/Websoft9/DocsPicture/en/alfresco/alfresco-modifypw-websoft9.png)
 
-2. start to change the password.
+2. Click【Change your Password】, start to change the password.
 
 ### Forgot Password
 
-Try to retrieve your password through e-mail when forgot it.
+Try to retrieve your password through database table as below: 
 
-Follow the steps below:
+1. Use **SSH** to connect Alfresco instances
 
-1. complete [SMTP setting](/solution-smtp.md);
+2. Run the `psql` of Alfresco
+   ```
+   docker exec -it alfresco-postgres psql -U alfresco -d alfresco
+   ```
 
-2. open
+3. Modify password by below SQL command (The new password is set to `admin`)
+   ```
+   UPDATE alf_node_properties SET string_value='209c6174da490caeb422f3fa5a7ae634' WHERE node_id=4 and qname_id=10
+   ```
+
+4. Exit the `psql` of PostgreSQL, then restart all containers
+   ```
+   cd /data/wwwroot/alfresco
+   docker-compose restart
+   ```

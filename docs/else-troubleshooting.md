@@ -15,9 +15,8 @@ Insufficient disk space and memory, incorrect configuration file may cause the f
 It is recommended to first check through the command.
 
 ```shell
-# restart Alfresco service
-systemctl status alfresco
-journalctl -u alfresco
+# check Alfresco services
+docker ps
 
 # view disk space
 df -lh
@@ -25,9 +24,3 @@ df -lh
 # view memory rate
 free -lh
 ```
-
-#### Error in Chrome when modify password?
-
-This error has nothing to do with Alfresco server. Just upgrade you local Chrome to solve it.
-
-![chrome error of Alfresco](https://libs.websoft9.com/Websoft9/DocsPicture/zh/alfresco/alfresco-chromeerror-websoft9.png)
