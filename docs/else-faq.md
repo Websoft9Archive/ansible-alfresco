@@ -1,12 +1,5 @@
 # FAQ
 
-#### How can I enable the debug mode of Alfresco service?
-
-```
-systemctl stop alfresco-server
-alfresco-server console
-```
-
 #### Can I reset password of Alfresco by command?
 
 Yes, e.g `alfrescoctl change_password  admin newpassword`
