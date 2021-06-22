@@ -18,7 +18,7 @@
 
 3. Alfresco会自动根据浏览器语言来选择程序语言
 
-> 需要了解更多 Alfresco 的使用，请参考官方文档：[Alfresco Documentation](https://docs.alfresco.com/content-services/community/using/content/)
+> 需要了解更多 Alfresco 的使用，请参考官方文档：[Alfresco Documentation](https://docs.alfresco.com/content-services/community/using/content/) 和 [Alfresco Videos](https://docs.alfresco.com/content-services/latest/tutorial/video/)
 
 ## Alfresco 入门向导
 
