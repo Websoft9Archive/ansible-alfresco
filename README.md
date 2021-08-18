@@ -6,7 +6,7 @@
 
 [English](/README.md) | [简体中文](/README-zh.md)  
 
-**Alfresco Cloud Installer**, developed by [Websoft9](https://www.websoft9.com), is an automatic installation program of  [Alfresco](https://www.alfresco.com/ecm-software/alfresco-community-editions) based on Ansible and shell. It helps user install Alfresco and pre-configure required items automatically and users only need to run a command on Linux. It simplifies the complicated installation and initialization process.  
+**Alfresco Cloud Installer**, developed by [Websoft9](https://www.websoft9.com), is an automatic installation program of [Alfresco](https://www.alfresco.com/ecm-software/alfresco-community-editions) based on Ansible and shell. It helps user install Alfresco and pre-configure required items automatically and users only need to run a command on Linux. It simplifies the complicated installation and initialization process.  
 
 ## System Requirement
 
@@ -17,13 +17,13 @@ System Requirement to install this repository are as following：
 | Operating System   | CentOS7.x, Ubuntu20.04, Amazon Linux2 | Optional                 |
 | Public Cloud     | AWS, Azure, Alibaba Cloud, HUAWEI ClOUD, Tencent Cloud    | Optional                 |
 | Private Cloud     | KVM, VMware, VirtualBox, OpenStack    | Optional                 |
-| Server Configuration | vCPU no less than 2 core, Memory no less than  4 GIB, Storage no less than 10 GB, Bandwidth no less than 100M ||
+| Server Configuration | vCPU no less than 2 core, Memory no less than 4 GIB, Storage no less than 20 GB, Swap no less than 2GB |Bandwidth no less than 100M|
 
-To learn more information, please view [Installation & Configuration](https://rabbitmq.apache.org/installation.html).
+To learn more information, please view [Installation & Configuration](https://github.com/Alfresco/acs-deployment/tree/master/docs/docker-compose).
 
 ## Ecosystem
 
-Core components of this repository: alfresco-share, alfresco-libreoffice, alfresco-content-repository-community, acs-community-ngnixpostgresql, alfresco-alfresco, alfresco-transform-misc, alfresco-search-services, alfresco-pdf-renderer
+Core components of this repository:  Nginx, Docker, Alfresco on docker, pgadmin on docker
 
 Learn more about [Parameters](/docs/stack-components.md).
 
@@ -50,10 +50,6 @@ Follow our [Alfresco image](https://apps.websoft9.com/alfresco) for installation
 
 **[Administrator Guide](https://support.websoft9.com/docs/alfresco)** 
 
-## Changelog
-
-Detailed changes are documented in the [CHANGELOG](/CHANGELOG.md).
-
 ## License
 
 [LGPL-3.0](/License.md), Additional Terms: It is not allowed to publish free or paid image based on this repository in any Cloud platform's Marketplace.
@@ -64,14 +60,16 @@ This program provided by Websoft9 contains a series of software with separate co
 
 ## FAQ
 
+#### How to install and view the latest release?
+
+This repository install way is Docker install, you can  view the version from [Official URL] (https://hub.docker.com/r/alfresco/alfresco-content-repository-community/tags?page=1&ordering=last_updated).  
+We will check [Release version](https://github.com/Websoft9/ansible-alfresco/releases) regularly. Update and test this project to ensure that users can successfully install the required version of Alfresco.
+
 #### Can I run this repository on Ansible Tower? 
 
 Yes.
 
-#### How to install and view the latest release?
+#### Although the results of the deploy by image are consistent with the results of deploy by script, what is the difference between the two deployment methods?
 
-Get the Alfresco version from [Alfresco repository](https://github.com/Alfresco/acs-community-deployment/blob/master/docker-compose/docker-compose.yml) .  
+Suggest you read the document [Deploy by Image vs Deploy by Script](https://support.websoft9.com/docs/faq/bz-product.html#deployment-comparison).
 
-#### Is the default password safe?
-
-The solution used the random password solution, every deployment produce unique password which is different from other users
