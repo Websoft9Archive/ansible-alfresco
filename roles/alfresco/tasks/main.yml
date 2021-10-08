@@ -6,7 +6,6 @@
   git:
     repo: "{{alfresco_git_url}}"
     dest: "{{alfresco_work_dir}}"
-    version: dev
 
 - name: Create dir for alfresco
   file: 
