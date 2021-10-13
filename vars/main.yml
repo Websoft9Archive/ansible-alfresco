@@ -1,6 +1,10 @@
 common_install_docker: True
 docker_install: False
 
+# install psql client
+postgresql_version: "13"
+postgresql_install_server: False
+
 nginx_reverse_proxy_port: "8080/share/page/"
 
 docker_applications:
