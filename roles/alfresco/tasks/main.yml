@@ -16,14 +16,6 @@
     - '{{alfresco_work_dir}}/volumes'
     - /data/db/postgresql
 
-- name: Rename compose env filename 
-  shell: |  
-    rm -rf docker-compose.yml .env
-    mv docker-compose-production.yml docker-compose.yml
-    mv .env_all .env
-  args:
-    chdir: '{{alfresco_work_dir}}'
-
 - name: Change alfresco site url
   shell: |
     public_ip=`wget -O - https://download.websoft9.com/ansible/get_ip.sh | bash`
